@@ -1,0 +1,20 @@
+# Notification Sound Placeholder
+# 
+# This is a placeholder file for the notification sound.
+# Replace this with an actual MP3 audio file for sound notifications.
+# 
+# Recommended specifications:
+# - Format: MP3, WAV, or OGG
+# - Duration: 1-3 seconds
+# - Volume: Moderate (not too loud)
+# - Sample rate: 44.1kHz or 48kHz
+# 
+# You can use any short notification sound, such as:
+# - System notification sounds
+# - Custom audio files
+# - Generated tones or chimes
+# 
+# To use a custom sound:
+# 1. Replace this file with your audio file
+# 2. Keep the same filename (notification.mp3)
+# 3. Or update the vibenotify.soundFile setting to point to your file
