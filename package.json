@@ -1,0 +1,162 @@
+{
+  "name": "vibenotify",
+  "displayName": "VibeNotify – AI Reply & Terminal Notifier",
+  "description": "Cross-IDE VS Code extension that notifies when AI chat is done and offers to run extracted terminal commands",
+  "version": "0.0.1",
+  "publisher": "yourid",
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "chat",
+    "notification",
+    "terminal",
+    "copilot",
+    "cursor",
+    "trae"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vibenotify.toggle",
+        "title": "Toggle VibeNotify",
+        "category": "VibeNotify"
+      },
+      {
+        "command": "vibenotify.testNotification",
+        "title": "Test Notification",
+        "category": "VibeNotify"
+      },
+      {
+        "command": "vibenotify.runLastExtractedInTerminal",
+        "title": "Run Last Extracted Commands",
+        "category": "VibeNotify"
+      },
+      {
+        "command": "vibenotify.showSource",
+        "title": "Show Source Chat",
+        "category": "VibeNotify"
+      }
+    ],
+    "configuration": {
+      "title": "VibeNotify",
+      "properties": {
+        "vibenotify.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable VibeNotify extension"
+        },
+        "vibenotify.silenceMs": {
+          "type": "number",
+          "default": 1500,
+          "minimum": 500,
+          "maximum": 10000,
+          "description": "Milliseconds of silence before considering chat idle"
+        },
+        "vibenotify.chatMatchers": {
+          "type": "array",
+          "default": [
+            {
+              "languageIdRegex": "^(copilot-chat|chat)$",
+              "schemeRegex": ".*",
+              "titleRegex": ".*"
+            },
+            {
+              "languageIdRegex": "^markdown$",
+              "schemeRegex": ".*",
+              "titleRegex": "(?i)(chat|assistant|reply)"
+            }
+          ],
+          "items": {
+            "type": "object",
+            "properties": {
+              "languageIdRegex": {
+                "type": "string",
+                "description": "Regular expression to match document language ID"
+              },
+              "schemeRegex": {
+                "type": "string",
+                "description": "Regular expression to match document URI scheme"
+              },
+              "titleRegex": {
+                "type": "string",
+                "description": "Regular expression to match document title"
+              }
+            },
+            "required": ["languageIdRegex", "schemeRegex", "titleRegex"]
+          },
+          "description": "Patterns to identify chat-like documents"
+        },
+        "vibenotify.notifyWithSound": {
+          "type": "boolean",
+          "default": false,
+          "description": "Play sound with notifications"
+        },
+        "vibenotify.soundFile": {
+          "type": "string",
+          "default": "media/sounds/notify.mp3",
+          "description": "Path to sound file for notifications"
+        },
+        "vibenotify.showStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show status bar item"
+        },
+        "vibenotify.terminalName": {
+          "type": "string",
+          "default": "VibeNotify",
+          "description": "Name of the terminal used for command execution"
+        },
+        "vibenotify.useTasks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use VS Code Tasks for better exit code tracking"
+        },
+        "vibenotify.autoRevealOnFinish": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically focus the chat tab when AI finishes"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.86.0",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.0",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8",
+    "@vscode/vsce": "^2.22.0"
+  },
+  "dependencies": {},
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourid/vibenotify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourid/vibenotify/issues"
+  },
+  "homepage": "https://github.com/yourid/vibenotify#readme",
+  "license": "MIT"
+}
